@@ -1,0 +1,53 @@
+﻿<Window x:Class="StockTrack.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StockTrack"
+        mc:Ignorable="d"
+        Title="StockTracker" Height="548.56" Width="577.606">
+    <Grid Background="#FF282828">
+        <Button x:Name="button_Track" Content="Track" HorizontalAlignment="Left" Margin="229,76,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="button_Click"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="46,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="textBox_TextChanged" Background="White" Text="Enter Symbol"/>
+
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="387,43,0,0" TextWrapping="Wrap" Text="Value:" VerticalAlignment="Top" Width="63" Foreground="White"/>
+        <TextBlock x:Name="textBlocka" HorizontalAlignment="Left" Margin="388,68,0,0" TextWrapping="Wrap" Text="Change:" VerticalAlignment="Top" Width="62" Foreground="White"/>
+        <TextBlock x:Name="textBlockb" HorizontalAlignment="Left" Margin="388,96,0,0" TextWrapping="Wrap" Text="Day High:" VerticalAlignment="Top" Width="66" Foreground="White"/>
+        <TextBlock x:Name="textBlockc" HorizontalAlignment="Left" Margin="388,129,0,0" TextWrapping="Wrap" Text="Day Low:" VerticalAlignment="Top" Width="62" Foreground="White"/>
+        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="464,43,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="63"/>
+        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="464,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62"/>
+        <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="464,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="66"/>
+        <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" Margin="464,129,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62"/>
+        <TextBlock x:Name="textBlock5" HorizontalAlignment="Left" Margin="290,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="249" Height="28"/>
+        <TextBlock x:Name="textBlock_PortName" HorizontalAlignment="Left" Margin="46,184,0,0" TextWrapping="Wrap" Text="Portfolio search" VerticalAlignment="Top" Height="23" Width="120" Foreground="White"/>
+        <TextBox x:Name="textBox_NameSearch" HorizontalAlignment="Left" Height="23" Margin="46,212,0,0" TextWrapping="Wrap" Text="Enter Name" VerticalAlignment="Top" Width="120" TextChanged="textBox1_TextChanged"/>
+        <TextBlock x:Name="textBlock_Value" HorizontalAlignment="Left" Margin="45,256,0,0" TextWrapping="Wrap" Text="Portfolio value:" VerticalAlignment="Top" Width="121" Foreground="White"/>
+        <TextBlock x:Name="textBlocka_userstock1" HorizontalAlignment="Left" Margin="46,282,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" Text="stock a" Foreground="White"/>
+        <TextBlock x:Name="textBlockb_userstock2" HorizontalAlignment="Left" Margin="46,310,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="66" Text="stock b" Foreground="White"/>
+        <TextBlock x:Name="textBlockc_userstock3" HorizontalAlignment="Left" Margin="46,343,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" Text="stock c" Foreground="White"/>
+        <TextBlock x:Name="textBlock1_Copy" HorizontalAlignment="Left" Margin="465,42,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="63"/>
+        <TextBlock x:Name="textBlock2_Copy" HorizontalAlignment="Left" Margin="465,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62"/>
+        <TextBlock x:Name="textBlock3_Copy" HorizontalAlignment="Left" Margin="465,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="66"/>
+        <TextBlock x:Name="textBlock4_Copy" HorizontalAlignment="Left" Margin="464,129,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62"/>
+        <TextBlock x:Name="textBlock1_Valuedisplay" HorizontalAlignment="Left" Margin="168,257,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="63" Text="Qty" Foreground="White"/>
+        <TextBlock x:Name="textBlock2_Changedisplay1" HorizontalAlignment="Left" Margin="168,282,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" Text="change" Foreground="White"/>
+        <TextBlock x:Name="textBlock3_Changedisplay2" HorizontalAlignment="Left" Margin="168,310,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="66" Text="change" Foreground="White"/>
+        <TextBlock x:Name="textBlock4_Changedisplay3" HorizontalAlignment="Left" Margin="168,343,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" Text="change" Foreground="White"/>
+        <Button x:Name="button_Buy" Content="Buy" HorizontalAlignment="Left" Margin="196,104,0,0" VerticalAlignment="Top" Width="75" Click="button_Buy_Click_1"/>
+        <Button x:Name="button_Sell" Content="Sell" HorizontalAlignment="Left" Margin="271,104,0,0" VerticalAlignment="Top" Width="75" Click="button_Sell_Click"/>
+        <TextBlock x:Name="textBlockc_Prev" HorizontalAlignment="Left" Margin="388,159,0,0" TextWrapping="Wrap" Text="Prev Close:" VerticalAlignment="Top" Width="62" Foreground="White"/>
+        <TextBlock x:Name="textBlock4_Copy2" HorizontalAlignment="Left" Margin="464,159,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62"/>
+        <TextBlock x:Name="textBlock4_Close" HorizontalAlignment="Left" Margin="464,159,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" Foreground="White"/>
+        <Button x:Name="button_Search" Content="Search" HorizontalAlignment="Left" Margin="192,212,0,0" VerticalAlignment="Top" Width="84" Click="button1_Copy1_Click" Height="23"/>
+        <Button x:Name="button_Create" Content="Create" HorizontalAlignment="Left" Margin="276,212,0,0" VerticalAlignment="Top" Width="84" RenderTransformOrigin="1.54,0.715" Height="23" Click="button_Create_Click"/>
+        <TextBlock x:Name="textBlocka_userstock4" HorizontalAlignment="Left" Margin="46,372,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" Text="stock d" Foreground="White"/>
+        <TextBlock x:Name="textBlockb_userstock5" HorizontalAlignment="Left" Margin="46,401,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="66" Text="stock e" Foreground="White"/>
+        <TextBlock x:Name="textBlockc_userstock6" HorizontalAlignment="Left" Margin="46,434,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" Text="stock f" Foreground="White"/>
+        <TextBlock x:Name="textBlock2_Changedisplay4" HorizontalAlignment="Left" Margin="168,372,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" Text="change" Foreground="White"/>
+        <TextBlock x:Name="textBlock3_Changedisplay5" HorizontalAlignment="Left" Margin="168,401,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="66" Text="change" Foreground="White"/>
+        <TextBlock x:Name="textBlock4_Changedisplay6" HorizontalAlignment="Left" Margin="168,434,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="62" Text="change" Foreground="White"/>
+        <TextBox x:Name="BuyBox" HorizontalAlignment="Left" Height="23" Margin="196,128,0,0" TextWrapping="Wrap" Text="buy amt" VerticalAlignment="Top" Width="75" TextChanged="textBox1_TextChanged_1"/>
+        <TextBox x:Name="SellBox" HorizontalAlignment="Left" Height="23" Margin="271,128,0,0" TextWrapping="Wrap" Text="sell amt" VerticalAlignment="Top" Width="75"/>
+
+    </Grid>
+</Window>

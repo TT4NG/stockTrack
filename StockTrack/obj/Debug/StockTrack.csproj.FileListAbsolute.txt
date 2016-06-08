@@ -1,0 +1,16 @@
+c:\users\t4ng1\documents\visual studio 2015\Projects\StockTrack\StockTrack\bin\Debug\StockTrack.exe.config
+c:\users\t4ng1\documents\visual studio 2015\Projects\StockTrack\StockTrack\bin\Debug\StockTrack.exe
+c:\users\t4ng1\documents\visual studio 2015\Projects\StockTrack\StockTrack\bin\Debug\StockTrack.pdb
+c:\users\t4ng1\documents\visual studio 2015\Projects\StockTrack\StockTrack\obj\Debug\StockTrack.csprojResolveAssemblyReference.cache
+c:\users\t4ng1\documents\visual studio 2015\Projects\StockTrack\StockTrack\obj\Debug\MainWindow.g.cs
+c:\users\t4ng1\documents\visual studio 2015\Projects\StockTrack\StockTrack\obj\Debug\App.g.cs
+c:\users\t4ng1\documents\visual studio 2015\Projects\StockTrack\StockTrack\obj\Debug\StockTrack_MarkupCompile.cache
+c:\users\t4ng1\documents\visual studio 2015\Projects\StockTrack\StockTrack\obj\Debug\StockTrack_MarkupCompile.lref
+c:\users\t4ng1\documents\visual studio 2015\Projects\StockTrack\StockTrack\obj\Debug\MainWindow.baml
+c:\users\t4ng1\documents\visual studio 2015\Projects\StockTrack\StockTrack\obj\Debug\StockTrack.g.resources
+c:\users\t4ng1\documents\visual studio 2015\Projects\StockTrack\StockTrack\obj\Debug\StockTrack.Properties.Resources.resources
+c:\users\t4ng1\documents\visual studio 2015\Projects\StockTrack\StockTrack\obj\Debug\StockTrack.csproj.GenerateResource.Cache
+c:\users\t4ng1\documents\visual studio 2015\Projects\StockTrack\StockTrack\obj\Debug\StockTrack.exe
+c:\users\t4ng1\documents\visual studio 2015\Projects\StockTrack\StockTrack\obj\Debug\StockTrack.pdb
+C:\Users\T4NG1\Documents\Visual Studio 2015\Projects\StockTrack\StockTrack\obj\Debug\Window1.g.cs
+C:\Users\T4NG1\Documents\Visual Studio 2015\Projects\StockTrack\StockTrack\obj\Debug\Window1.baml
