@@ -13,5 +13,9 @@ namespace StockTrack
 
 
         }
+        public void add()
+        {
+            
+        }
     }
 }

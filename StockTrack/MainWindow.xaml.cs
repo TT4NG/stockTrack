@@ -23,27 +23,17 @@ namespace StockTrack
     /// </summary>
     public partial class MainWindow : Window
     {
-        string stockVal;
-        string date;
-        string symbol;
-        float quantity;
+        public string stockVal;
+        public string date;
+        public string symbol;
+        public float quantity;
 
         public MainWindow()
         {
             InitializeComponent();
-            textBlock.Foreground = Brushes.White;
-            textBlocka.Foreground = Brushes.White;
-            textBlockb.Foreground = Brushes.White;
-            textBlockc.Foreground = Brushes.White;
-            textBlock2_Changedisplay1.Foreground = Brushes.White;
-            textBlockc_Prev.Foreground = Brushes.White;
-            textBlock_PortName.Foreground = Brushes.White;
-            textBlock_Value.Foreground = Brushes.White;
             textBlock1.Foreground = Brushes.White;
-
-
-
         }
+
         // Regular tracking of single stock
         public void button_Click(object sender, RoutedEventArgs e)
         {
@@ -64,23 +54,27 @@ namespace StockTrack
                 string result = GetWebResponse(url);
                 Console.WriteLine(result.Replace("\\r\\\n", "\r\n"));
 
-                //set the prices
+                
                 string[] lines = result.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+               
+                //set the prices
+                textBlock1.Foreground = Brushes.White;
                 textBlock1.Text = decimal.Parse(lines[0].Split(',')[1]).ToString("C3");
-
+                
+                //**********save stock value/date for portfolio use***********************
                 stockVal = decimal.Parse(lines[0].Split(',')[1]).ToString();
                 date = (lines[0].Split('"')[3]).ToString();
                 
 
-                string j = decimal.Parse(lines[0].Split(',')[4]).ToString();
-                if (j[0] == '-')
+                string sign = decimal.Parse(lines[0].Split(',')[4]).ToString();
+                if (sign[0] == '-')
                 {
-                    textBlock2.Text = j + " %";
+                    textBlock2.Text = sign + " %";
                     textBlock2.Foreground = Brushes.Red;
                 }
                 else
                 {
-                    textBlock2.Text = j + " %";
+                    textBlock2.Text = sign + " %";
                     textBlock2.Foreground = Brushes.LightGreen;
                 }
 
@@ -95,19 +89,20 @@ namespace StockTrack
                 //stock full name
                 textBlock5.Foreground = Brushes.White;
                 textBlock5.Text = (lines[0].Split('"')[7]).ToString();
+                // save symbol for portfolio
                 symbol = (lines[0].Split('"')[1]).ToString();
 
+
                 //previous close
+                textBlock4_Close.Foreground = Brushes.Yellow;
                 textBlock4_Close.Text = decimal.Parse(lines[0].Split(',')[8]).ToString("C3");
-
-
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Read Error");
             }
         }
+
         private string GetWebResponse(string url)
         {
             WebClient web_client = new WebClient();
@@ -120,15 +115,6 @@ namespace StockTrack
             }
         }
 
-        private void textBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            
-        }
-        private void textBox_Enter(object sender, TextChangedEventArgs e)
-        { 
-
-
-        }
        //buy stocks
         public void button_Buy_Click_1(object sender, RoutedEventArgs e)
         {
@@ -138,23 +124,51 @@ namespace StockTrack
             title = tit.Replace("NAME", name);
             int buy;
             int.TryParse(BuyBox.Text, out buy);
-            
+            symbol = symbol.ToUpper();
+            string previous = System.IO.File.ReadAllText(title);
+
             try
             {
                 string[] row = System.IO.File.ReadAllLines(title);
-                if (symbol == (row[0].Split(',')[1]).ToString() || symbol == "")
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(title))
                 {
-                    if (buy > 0)
+                    foreach (string line in row)
                     {
-                        quantity += buy;
+                        // If the line contains the stock symbol, write the line to the file.
+                        if (!line.Contains(symbol))
+                        {
+                            if (buy > 0)
+                            {
+                                
+                                quantity += buy;
+                                string text = (stockVal + ',' + symbol + ',' + quantity);
+                                file.WriteLine(previous + text);
+                                quantity = 0;
+                                break;
+                            }
+                            else
+                            {
+                                string no = "Invalid input";
+                                MessageBox.Show(no, "Read Error");
+                            }
+                        }
+                        else if (line.Contains(symbol))
+                        {
+                            if (buy > 0)
+                            {
+                                quantity += buy;
+                                string now = ( stockVal + ',' + symbol + ',' + quantity);
+                                file.WriteLine(now + previous);
+                                quantity = 0;
+                                break;
+                            }
+                            else
+                            {
+                                string no = "Invalid input";
+                                MessageBox.Show(no, "Read Error");
+                            }
+                        }
                     }
-
-                    //creates text file 
-                    string text = stockVal + "," + symbol + "," + quantity;
-                    System.IO.File.WriteAllText(title, text);
-
-                    //append the document with a new line for each bought stock type
-                    
                 }
             }
             catch (Exception ex)
@@ -170,20 +184,52 @@ namespace StockTrack
             const string tit = @"C:\Users\T4NG1\Desktop\stocktracker Test\NAME.txt";
             title = tit.Replace("NAME", name);
             int sell;
-            int.TryParse(SellBox.Text, out sell);
+            int.TryParse(BuyBox.Text, out sell);
+            symbol = symbol.ToUpper();
+            string previous = System.IO.File.ReadAllText(title);
 
             try
             {
                 string[] row = System.IO.File.ReadAllLines(title);
-                if (symbol == (row[0].Split(',')[1]).ToString())
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(title))
                 {
-                    if (quantity >= sell)
+                    foreach (string line in row)
                     {
-                        quantity -= sell;
+                        // If the line contains the stock symbol, write the line to the file.
+                        if (!line.Contains(symbol))
+                        {
+                            if (sell > 0)
+                            {
+
+                                quantity -= sell;
+                                string text = (stockVal + ',' + symbol + ',' + quantity);
+                                file.WriteLine(previous + text);
+                                quantity = 0;
+                                break;
+                            }
+                            else
+                            {
+                                string no = "Invalid input";
+                                MessageBox.Show(no, "Read Error");
+                            }
+                        }
+                        else if (line.Contains(symbol))
+                        {
+                            if (sell > 0)
+                            {
+                                quantity -= sell;
+                                string now = (stockVal + ',' + symbol + ',' + quantity);
+                                file.WriteLine(now + previous);
+                                quantity = 0;
+                                break;
+                            }
+                            else
+                            {
+                                string no = "Invalid input";
+                                MessageBox.Show(no, "Read Error");
+                            }
+                        }
                     }
-                    //creates text file 
-                    string text = stockVal + "," + symbol + "," + quantity;
-                    System.IO.File.WriteAllText(title, text);
                 }
             }
             catch (Exception ex)
@@ -200,19 +246,63 @@ namespace StockTrack
             string title;
             const string tit = @"C:\Users\T4NG1\Desktop\stocktracker Test\NAME.txt";
             title = tit.Replace("NAME", name);
+            decimal sum = 0;
+            decimal Nsum = 0;
+            decimal first_buy;
+            decimal first_buy1;
             try
             {
-                //reads it
-                string[] row = System.IO.File.ReadAllLines(title);
-                //then prints out stock symbols to each appropriate box
-                textBlocka_userstock1.Text = (row[0].Split(',')[1]).ToString();
+                // for loop so that all lines are read 
+                Portfolio port = new Portfolio();
+                port.add();
 
-                //prints overall net loss or gain % to appropriate box
-                textBlock2_Changedisplay1.Text = (row[0].Split(',')[2]).ToString();
+                string[] row = System.IO.File.ReadAllLines(title);
+                for (int counter = 1; counter <= row.Length; counter++)
+                {
+                    decimal symq1;
+                    decimal symq2;
+                    string sym = (row[counter].Split(',')[1]).ToString();
+                    string sym2 = (row[counter + 1].Split(',')[1]).ToString();
+                    symq1 = decimal.Parse(row[counter].Split(',')[2]);
+                    symq2 = decimal.Parse(row[counter + 1].Split(',')[2]);
+                    // is the symbol in the middle the same as the next line?
+                    if (sym == sym2)
+                    {
+                        if (sum == 0)
+                        {
+                            sum += symq2 + symq1;
+                        }
+                        else
+                        {
+                            sum += symq2;
+                        }
+                        //print the summation of stocks bought and the symbol + initial price
+                        textBlocka_userstock1.Text = sym;
+                        textBlock2_Changedisplay1.Text = Convert.ToString(sum);
+                        first_buy = decimal.Parse(row[counter].Split(',')[0]);
+                        textBlock6.Text = Convert.ToString(first_buy);
+
+                    }
+                    else if (sym != sym2)
+                    {
+                        if (Nsum == 0)
+                        {
+                            Nsum += symq2;
+
+                            textBlockb_userstock2.Text = sym2;
+                            textBlock3_Changedisplay2.Text = Convert.ToString(Nsum);
+                            first_buy1 = decimal.Parse(row[counter+1].Split(',')[0]);
+                            textBlock7.Text = Convert.ToString(first_buy1);
+                        }
+                    }
+                }
             }
+
+
+
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Read Error");
+                MessageBox.Show(ex.Message, "LOST");
             }
         }
         //creates a file
@@ -222,7 +312,7 @@ namespace StockTrack
             string title;
             const string tit = @"C:\Users\T4NG1\Desktop\stocktracker Test\NAME.txt";
             title = tit.Replace("NAME", name);
-            System.IO.File.WriteAllText(title, ",,");
+            System.IO.File.WriteAllText(title,"\n");
         }
 
         private void textBox1_TextChanged_1(object sender, TextChangedEventArgs e)
@@ -231,6 +321,15 @@ namespace StockTrack
         }
         private void textBox1_TextChanged(object sender, TextChangedEventArgs e)
         {
+
+        }
+        private void textBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+        private void textBox_Enter(object sender, TextChangedEventArgs e)
+        {
+
 
         }
     }
